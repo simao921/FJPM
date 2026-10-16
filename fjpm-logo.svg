@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 92" role="img" aria-labelledby="title">
+  <title id="title">FJPM Peças Auto</title>
+  <defs>
+    <linearGradient id="red" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff3946"/>
+      <stop offset="1" stop-color="#d90d21"/>
+    </linearGradient>
+  </defs>
+  <path d="M13 10h51l-4 13H28l-4 13h27l-4 13H20l-6 21H0z" fill="url(#red)"/>
+  <path d="M77 20h20L86 62c-4 14-13 20-29 20H44l4-14h10c6 0 9-2 11-8z" fill="#fff"/>
+  <path d="M104 20h31c14 0 20 8 16 21l-4 13c-3 10-10 15-21 15h-9l-4 13H94zm20 14-4 20h9c3 0 5-1 6-5l2-9c1-4-1-6-5-6z" fill="#fff"/>
+  <path d="M159 20h20l-11 42h-20zm28 0h20l-11 42h-20z" fill="#fff"/>
+  <path d="M213 20h20l-11 42h-20z" fill="#fff"/>
+  <path d="M153 68h82l-4 14h-82z" fill="url(#red)"/>
+  <text x="251" y="42" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="800" letter-spacing="1">PEÇAS</text>
+  <text x="251" y="62" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="800" letter-spacing="1">AUTO</text>
+  <path d="M251 72h81" stroke="url(#red)" stroke-linecap="round" stroke-width="4"/>
+</svg>
