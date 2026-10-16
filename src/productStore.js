@@ -3,6 +3,20 @@ import { requireSupabase } from "./supabase.js";
 export const CATEGORIES = ["Motor", "Travagem", "Suspensão", "Carroçaria", "Elétrica", "Interior", "Outros"];
 const BUCKET = "product-images";
 
+function explainSupabaseError(error, resource) {
+  const message = error instanceof Error ? error.message : String(error);
+  if (/row-level security|not authorized|permission denied|unauthorized/i.test(message)) {
+    return new Error(`O Supabase recusou a gravação da ${resource}. Confirma que o utilizador está em public.store_admins e que as políticas do ficheiro supabase/schema.sql foram executadas.`);
+  }
+  if (/bucket .*not found|bucket not found/i.test(message)) {
+    return new Error("O armazenamento de imagens ainda não está configurado. Executa novamente o ficheiro supabase/schema.sql no SQL Editor.");
+  }
+  if (/could not find the table|relation .* does not exist|schema cache/i.test(message)) {
+    return new Error("A tabela de produtos ainda não está configurada. Executa o ficheiro supabase/schema.sql no SQL Editor e atualiza a página.");
+  }
+  return error instanceof Error ? error : new Error(`Não foi possível guardar a ${resource}.`);
+}
+
 function fromDatabase(row, client) {
   const { data } = client.storage.from(BUCKET).getPublicUrl(row.image_path);
   return {
@@ -68,7 +82,7 @@ export async function saveProduct(product, imageFile) {
       cacheControl: "31536000",
       upsert: false,
     });
-    if (uploadError) throw uploadError;
+    if (uploadError) throw explainSupabaseError(uploadError, "imagem");
     imagePath = uploadedPath;
   }
 
@@ -94,7 +108,7 @@ export async function saveProduct(product, imageFile) {
       const { error: cleanupError } = await client.storage.from(BUCKET).remove([uploadedPath]);
       if (cleanupError) console.error("Não foi possível remover a imagem após falha ao guardar:", cleanupError);
     }
-    throw error;
+    throw explainSupabaseError(error, "produto");
   }
 
   if (uploadedPath && product.imagePath) {

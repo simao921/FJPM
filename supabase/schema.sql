@@ -114,5 +114,7 @@ create policy "Admins can delete product images"
     and exists (select 1 from public.store_admins where user_id = (select auth.uid()))
   );
 
--- Depois de criares o utilizador administrador em Authentication > Users:
--- insert into public.store_admins (user_id) values ('SUBSTITUIR-PELO-USER-UID');
+-- O utilizador administrador já criado em Authentication > Users:
+insert into public.store_admins (user_id)
+values ('b4112f43-cc7a-4ee4-b8a7-24293e971c14')
+on conflict (user_id) do nothing;
