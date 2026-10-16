@@ -116,5 +116,5 @@ create policy "Admins can delete product images"
 
 -- O utilizador administrador já criado em Authentication > Users:
 insert into public.store_admins (user_id)
-values ('b4112f43-cc7a-4ee4-b8a7-24293e971c14')
+values ('b5c2b3e4-3f1c-409b-8338-c25953ab1d87')
 on conflict (user_id) do nothing;
